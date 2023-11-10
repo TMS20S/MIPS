@@ -1,6 +1,9 @@
 .data
- W: .word 3 ,2 ,1
+ W: .word 3 ,9 ,4
  N: .asciiz "  Name: "
+  N2: .asciiz "  eve "
+ M: .asciiz "  ODD "
+ N1: .asciiz "  \n "
  D: .space 100 
  V: .word 100
 .text
@@ -14,14 +17,16 @@ li $t4,3
 li $t5,0# i=0
 loop:
 	beq $t5,$t4,ex
-	addi $t5,$t5,1
+	addi $t5,$t5,4
 		blt $t1,$t2,g # 3<2  # 2<1
 		blt $t1,$t3,r # 3<1 # 2<3
 		move $t6,$t1 # t6 =3 #
 		move $t1,$t2 # t1=2 # 
 		move $t2,$t3  # t2=1 #
 		move $t3,$t6 # t3=3 #
-		
+
+
+
 r:
  	move $t6,$t1 # t6 =2 #
 	move $t1,$t2 # t1=1 # 
@@ -64,6 +69,14 @@ li $v0,1
  move $a0,$t3
  syscall
  
+ li $v0,4
+ la $a0,N
+ syscall
+ 
+ j ex1
+ ex1:
+ li $v0,10
+syscall 
  
 NAME:    
 li $v0, 8
